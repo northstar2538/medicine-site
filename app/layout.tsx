@@ -47,6 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Home</a>
     <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
     <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Blog</a>
+    <a href="/contact" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Contact</a>
   </nav>
 </header>
         {/* PAGE CONTENT */}
@@ -54,8 +55,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
 
-        {/* FOOTER (ONLY COPYRIGHT) */}
-   <footer
+ {/* FOOTER */}
+<footer
   style={{
     padding: 20,
     backgroundColor: '#f0f0f0',
@@ -64,9 +65,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   }}
 >
   <p>© 2026 MedDataTool</p>
-  <p>
-    <a href="/privacy" style={{ color: '#1a73e8', textDecoration: 'underline' }}>Privacy Policy</a>
-  </p>
+
+  <div style={{ marginTop: 8 }}>
+    <a href="/" style={{ margin: "0 10px", color: "#1a73e8" }}>Home</a>
+    <a href="/about" style={{ margin: "0 10px", color: "#1a73e8" }}>About</a>
+    <a href="/privacy" style={{ margin: "0 10px", color: "#1a73e8" }}>Privacy</a>
+    <a href="/contact" style={{ margin: "0 10px", color: "#1a73e8" }}>Contact</a>
+    <a href="/blog" style={{ margin: "0 10px", color: "#1a73e8" }}>Blog</a>
+  </div>
 </footer>
 
       </body>
