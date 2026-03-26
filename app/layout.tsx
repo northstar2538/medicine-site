@@ -1,34 +1,75 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import Link from 'next/link';
+import { ReactNode } from 'react';
+import './globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Medicine Information Tool",
-  description: "Search medicines and there uses",
+ export const metadata = {
+  title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
+  description:
+    "Search medications like Ozempic, Wegovy, Keytruda and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
+  metadataBase: new URL("https://meddatatool.com"),
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          fontFamily: 'Arial, sans-serif',
+          margin: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh', // ✅ important
+        }}
       >
-        {children}
+        
+ {/* NAVBAR */}
+<header
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "15px 20px",
+    borderBottom: "1px solid #eee",
+    background: "linear-gradient(90deg, #007BFF, #00A3FF)", // gradient blue
+    color: "#fff",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)" // subtle shadow for depth
+  }}
+>
+  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+    <img src="/logo.png" alt="MedDataTool" style={{ width: 40, height: 40, fontWeight: "bold" }} />
+    <span style={{ fontWeight: "900", fontSize: "20px" }}> {/* made MedDataTool bolder */}
+      MedDataTool
+    </span>
+  </div>
+
+  <nav style={{ display: "flex", gap: "20px" }}>
+    <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Home</a>
+    <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
+    <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Blog</a>
+  </nav>
+</header>
+        {/* PAGE CONTENT */}
+        <main style={{ flex: 1 }}>
+          {children}
+        </main>
+
+        {/* FOOTER (ONLY COPYRIGHT) */}
+   <footer
+  style={{
+    padding: 20,
+    backgroundColor: '#f0f0f0',
+    textAlign: 'center',
+    fontSize: 12,
+  }}
+>
+  <p>© 2026 MedDataTool</p>
+  <p>
+    <a href="/privacy" style={{ color: '#1a73e8', textDecoration: 'underline' }}>Privacy Policy</a>
+  </p>
+</footer>
+
       </body>
     </html>
   );
-}
+} 
