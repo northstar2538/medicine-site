@@ -26,7 +26,7 @@ export async function GET() {
     ];
 
     // ✅ Example drug list (TEMP — we improve later)
-    const res = await fetch("http://localhost:3000/api/all-drugs");
+    const res = await fetch("https://meddatatool.com/api/all-drugs");
 const drugs: string[] = await res.json();
 
     const drugUrls = drugs.map(
