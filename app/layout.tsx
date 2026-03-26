@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Home</a>
     <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
     <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Blog</a>
-    <a href="/contact" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Contact</a>
+    
   </nav>
 </header>
         {/* PAGE CONTENT */}
