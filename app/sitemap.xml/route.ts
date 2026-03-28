@@ -1,37 +1,44 @@
 import { NextResponse } from "next/server";
+import { allDrugs } from "@/data/allDrugs";
 
 function generateSitemapXml(urls: string[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${urls
-      .map(
-        (url) => `
-      <url>
-        <loc>${url}</loc>
-      </url>`
-      )
-      .join("")}
-  </urlset>`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (url) => `
+  <url>
+    <loc>${url}</loc>
+  </url>`
+  )
+  .join("")}
+</urlset>`;
 }
 
 export async function GET() {
   try {
-     const baseUrl = "https://meddatatool.com";
+    const baseUrl = "https://meddatatool.com";
 
-    // ✅ Static pages
+    // Static pages
     const staticUrls = [
       `${baseUrl}/`,
       `${baseUrl}/about`,
       `${baseUrl}/privacy`,
     ];
 
-    // ✅ Example drug list (TEMP — we improve later)
-    const res = await fetch("https://meddatatool.com/api/all-drugs");
-const drugs: string[] = await res.json();
+    // Remove duplicate drug names
+    const uniqueDrugs = [...new Set(allDrugs)];
 
-    const drugUrls = drugs.map(
-      (drug) => `${baseUrl}/drugs/${encodeURIComponent(drug)}`
-    );
+    // Convert drug names to SEO-friendly slugs
+    const drugUrls = uniqueDrugs.map((drug) => {
+      const slug = drug
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-");
+
+      return `${baseUrl}/drugs/${slug}`;
+    });
 
     const allUrls = [...staticUrls, ...drugUrls];
 
@@ -43,6 +50,7 @@ const drugs: string[] = await res.json();
       },
     });
   } catch (err) {
+    console.error("Sitemap error:", err);
     return new NextResponse("Error generating sitemap", { status: 500 });
   }
 } 
