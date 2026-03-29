@@ -27,7 +27,12 @@ export default function PrivacyPage() {
 
       <h2 style={{ marginTop: 20, fontSize: 20 }}>Contact</h2>
       <p>
-        For privacy concerns, please contact us at <a href="mailto:contact@meddatatool.com" style={{ color: "#1a73e8" }}>contact@meddatatool.com</a>.
+        For privacy concerns, please contact us at <a
+  href="mailto:contact@meddatatool.com"
+  style={{ color: "#2563eb", textDecoration: "underline" }}
+>
+  contact@meddatatool.com
+</a>.
       </p>
     </main>
   );
