@@ -24,32 +24,55 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         
  {/* NAVBAR */}
+ {/* NAVBAR */}
 <header
   style={{
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    flexWrap: "wrap", // allows mobile wrapping
     padding: "15px 20px",
     borderBottom: "1px solid #eee",
-    background: "linear-gradient(90deg, #007BFF, #00A3FF)", // gradient blue
+    background: "linear-gradient(90deg, #007BFF, #00A3FF)",
     color: "#fff",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)" // subtle shadow for depth
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
   }}
 >
   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-    <img src="/logo.png" alt="MedDataTool" style={{ width: 40, height: 40, fontWeight: "bold" }} />
-    <span style={{ fontWeight: "900", fontSize: "20px" }}> {/* made MedDataTool bolder */}
+    <img
+      src="/logo.png"
+      alt="MedDataTool"
+      style={{ width: 40, height: 40 }}
+    />
+
+    <span style={{ fontWeight: "900", fontSize: "20px" }}>
       MedDataTool
     </span>
   </div>
 
-  <nav style={{ display: "flex", gap: "20px" }}>
-    <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Home</a>
-     <a href="/drugs" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
-    Drugs A–Z</a>
-    <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Blog</a>
-    <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
-    
+  <nav
+    style={{
+      display: "flex",
+      gap: "20px",
+      flexWrap: "wrap", // allows nav items to wrap on mobile
+      marginTop: "10px"
+    }}
+  >
+    <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
+      Home
+    </a>
+
+    <a href="/drugs" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
+      Drugs A–Z
+    </a>
+
+    <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
+      Blog
+    </a>
+
+    <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
+      About
+    </a>
   </nav>
 </header>
         {/* PAGE CONTENT */}
