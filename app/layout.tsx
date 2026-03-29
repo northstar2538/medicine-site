@@ -45,8 +45,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   <nav style={{ display: "flex", gap: "20px" }}>
     <a href="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Home</a>
-    <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
+     <a href="/drugs" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>
+    Drugs A–Z</a>
     <a href="/blog" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>Blog</a>
+    <a href="/about" style={{ color: "#fff", textDecoration: "none", fontWeight: "700" }}>About</a>
     
   </nav>
 </header>
