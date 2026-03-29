@@ -24,6 +24,7 @@ export async function GET() {
       `${baseUrl}/`,
       `${baseUrl}/about`,
       `${baseUrl}/privacy`,
+      `${baseUrl}/contact`,
     ];
 
     // Remove duplicate drug names

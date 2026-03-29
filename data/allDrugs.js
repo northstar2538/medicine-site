@@ -1,5 +1,8 @@
 // /data/allDrugs.js
 export const allDrugs = [
+  "ozempic",
+  "keytruda",
+  "wegovy",
   "metformin",
   "lisinopril",
   "atorvastatin",
