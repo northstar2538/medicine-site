@@ -203,7 +203,6 @@ export const allDrugs = [
   "fluoxetine",
   "mirtazapine",
   "nortriptyline",
-  "amitryptyline",
   "imipramine",
   "clomipramine",
   "doxepin"
