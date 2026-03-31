@@ -4,8 +4,19 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DrugUI from "./DrugUI";
 
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "");
+}
+
 interface FDAResult {
-  openfda?: { brand_name?: string[]; generic_name?: string[]; manufacturer_name?: string[] };
+  openfda?: {
+    brand_name?: string[];
+    generic_name?: string[];
+    manufacturer_name?: string[];
+  };
   description?: string[];
   indications_and_usage?: string[];
   dosage_and_administration?: string[];
@@ -22,35 +33,44 @@ export default function DrugClient({ mainDrug, otherBrands, initialDrug }: Props
   const router = useRouter();
 
   const [aiSummary, setAiSummary] = useState<string>("");
-const [aiLoading, setAiLoading] = useState(true);
+  const [aiLoading, setAiLoading] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState(initialDrug);
 
+  // Remove duplicate brand names
+  const uniqueBrands: string[] = Array.from(
+    new Map(
+      otherBrands
+        .map((item) => item.openfda?.brand_name?.[0])
+        .filter(Boolean)
+        .map((brand) => [brand!.toLowerCase(), brand as string])
+    ).values()
+  );
+
   // Fetch AI summary
-   useEffect(() => {
-  async function fetchAI() {
-    try {
-      setAiLoading(true);
+  useEffect(() => {
+    async function fetchAI() {
+      try {
+        setAiLoading(true);
 
-      const res = await fetch("/api/ai-summary", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fdaData: [mainDrug] }),
-      });
+        const res = await fetch("/api/ai-summary", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fdaData: [mainDrug] }),
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      setAiSummary(data.summaries?.[0] || "AI summary unavailable.");
-    } catch (err: any) {
-      setAiSummary("AI summary unavailable.");
-    } finally {
-      setAiLoading(false);
+        setAiSummary(data.summaries?.[0] || "AI summary unavailable.");
+      } catch {
+        setAiSummary("AI summary unavailable.");
+      } finally {
+        setAiLoading(false);
+      }
     }
-  }
 
-  fetchAI();
-}, [mainDrug]);
+    fetchAI();
+  }, [mainDrug]);
 
   // Handle search
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,6 +81,7 @@ const [aiLoading, setAiLoading] = useState(true);
 
   return (
     <main style={{ flex: 1, padding: 20, fontFamily: "Arial, sans-serif" }}>
+      
       {/* SEARCH BAR */}
       <form
         onSubmit={handleSearch}
@@ -79,6 +100,7 @@ const [aiLoading, setAiLoading] = useState(true);
             border: "1px solid #ccc",
           }}
         />
+
         <button
           type="submit"
           style={{
@@ -95,26 +117,12 @@ const [aiLoading, setAiLoading] = useState(true);
         </button>
       </form>
 
-      {/* LOADING / ERROR */}
-   {aiLoading ? (
-  <div style={{ textAlign: "center", margin: "10px 0" }}>
-    <p>Generating summary...</p>
-  </div>
-) : (
-  <DrugUI
-    drugData={{
-      name: mainDrug.openfda?.brand_name?.[0] || initialDrug,
-      uses: mainDrug.indications_and_usage?.join(" ") || "N/A",
-      dosage: mainDrug.dosage_and_administration?.join(" ") || "N/A",
-      sideEffects: mainDrug.description?.join(" ") || "N/A",
-      warnings: mainDrug.warnings?.join(" ") || "N/A",
-      aiSummary,
-    }}
-  />
-)}
-
-      {/* MAIN DRUG */}
-      {!loading && mainDrug && (
+      {/* AI SUMMARY */}
+      {aiLoading ? (
+        <div style={{ textAlign: "center", margin: "10px 0" }}>
+          <p>Generating summary...</p>
+        </div>
+      ) : (
         <DrugUI
           drugData={{
             name: mainDrug.openfda?.brand_name?.[0] || initialDrug,
@@ -128,7 +136,7 @@ const [aiLoading, setAiLoading] = useState(true);
       )}
 
       {/* OTHER BRANDS */}
-      {otherBrands.length > 0 && (
+      {uniqueBrands.length > 0 && (
         <div
           style={{
             maxWidth: 800,
@@ -140,19 +148,16 @@ const [aiLoading, setAiLoading] = useState(true);
           }}
         >
           <strong>Other Brands:</strong>
+
           <ul style={{ listStyleType: "disc", paddingLeft: 20, marginTop: 8 }}>
-            {otherBrands.map((item, idx) => (
+            {uniqueBrands.map((brand, idx) => (
               <li key={idx}>
-                {item.openfda?.brand_name?.[0] ? (
-                  <a
-                    href={`/drugs/${encodeURIComponent(item.openfda.brand_name[0])}`}
-                    style={{ color: "#1a73e8", textDecoration: "underline" }}
-                  >
-                    {item.openfda.brand_name[0]}
-                  </a>
-                ) : (
-                  "Unknown Brand"
-                )}
+                <a
+                  href={`/drugs/${slugify(brand)}`}
+                  style={{ color: "#1a73e8", textDecoration: "underline" }}
+                >
+                  {brand}
+                </a>
               </li>
             ))}
           </ul>
@@ -178,6 +183,7 @@ const [aiLoading, setAiLoading] = useState(true);
         <br />
         <strong>Data Source:</strong> Publicly available drug labeling information from the U.S. Food and Drug Administration (FDA).
       </div>
+
     </main>
   );
-}
+} 

@@ -1,3 +1,4 @@
+
 import DrugClient from "./DrugClient";
 import { Metadata } from "next";
 
@@ -83,3 +84,4 @@ export default async function Page({
     />
   );
 } 
+ 

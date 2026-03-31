@@ -29,7 +29,7 @@ export default function Home() {
       >
         <input
           type="text"
-          placeholder="Search drug name (e.g., Ozempic)"
+          placeholder="Search drug name (e.g., Metformin)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -45,9 +45,9 @@ export default function Home() {
       {/* Example Searches */}
       <p className="text-center text-gray-700 mt-2">
         Example searches:{" "}
-        <a href="/drugs/Ozempic" className="text-blue-600 hover:underline">Ozempic</a>,{" "}
-        <a href="/drugs/Keytruda" className="text-blue-600 hover:underline">Keytruda</a>,{" "}
-        <a href="/drugs/Wegovy" className="text-blue-600 hover:underline">Wegovy</a>
+        <a href="/drugs/Metformin" className="text-blue-600 hover:underline">Metformin</a>,{" "}
+        <a href="/drugs/Amoxicillin" className="text-blue-600 hover:underline">Amoxicillin</a>,{" "}
+        <a href="/drugs/Atorvastatin" className="text-blue-600 hover:underline">Atorvastatin</a>
       </p>
 
       {/* Intro Paragraph */}

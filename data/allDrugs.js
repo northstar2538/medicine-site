@@ -205,5 +205,6 @@ export const allDrugs = [
   "nortriptyline",
   "imipramine",
   "clomipramine",
-  "doxepin"
+  "doxepin",
+  "lipitor"
 ]; 
