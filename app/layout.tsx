@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
  export const metadata = {
   title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
   description:
-    "Search medications like Ozempic, Wegovy, Keytruda and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
+    "Search medications like   Metformin, Amoxicillin, Atorvastatin and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
   metadataBase: new URL("https://meddatatool.com"),
 };
 
