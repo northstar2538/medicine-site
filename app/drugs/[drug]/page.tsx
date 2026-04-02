@@ -37,13 +37,13 @@ export default async function Page({
   const { drug } = await params;
 
   let mainDrug: FDAResult | null = null;
-  let otherBrands: FDAResult[] = [];
+  let otherBrands: string[] = [];
 
   try {
-    const res = await fetch(
-      `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${drug}&limit=5`,
-      { cache: "no-store" }
-    );
+ const res = await fetch(
+  `https://api.fda.gov/drug/label.json?search=openfda.brand_name:${drug}+OR+openfda.generic_name:${drug}&limit=20`,
+  { cache: "no-store" }
+);
 
     if (res.ok) {
       const json = await res.json();
@@ -65,7 +65,15 @@ export default async function Page({
           }) || data[0];
 
         mainDrug = matched;
-        otherBrands = data.filter((item) => item !== matched);
+         const brandList = [
+  ...new Set(
+    data.flatMap((item: FDAResult) => item.openfda?.brand_name ?? [])
+  )
+];
+
+otherBrands = brandList
+  .filter((b) => b.toLowerCase() !== queryLower)
+  .filter((b) => !b.toLowerCase().includes(" and "));
       }
     }
   } catch (err) {

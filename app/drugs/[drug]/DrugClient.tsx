@@ -25,7 +25,7 @@ interface FDAResult {
 
 interface Props {
   mainDrug: FDAResult;
-  otherBrands: FDAResult[];
+  otherBrands: string[];
   initialDrug: string;
 }
 
@@ -39,13 +39,12 @@ export default function DrugClient({ mainDrug, otherBrands, initialDrug }: Props
 
   // Remove duplicate brand names
   const uniqueBrands: string[] = Array.from(
-    new Map(
-      otherBrands
-        .map((item) => item.openfda?.brand_name?.[0])
-        .filter(Boolean)
-        .map((brand) => [brand!.toLowerCase(), brand as string])
-    ).values()
-  );
+  new Map(
+    otherBrands
+      .filter(Boolean)
+      .map((brand) => [brand.toLowerCase(), brand])
+  ).values()
+);
 
   // Fetch AI summary
   useEffect(() => {
