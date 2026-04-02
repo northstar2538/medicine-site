@@ -1,7 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import './globals.css';
 
  export const metadata = {
   title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
@@ -103,4 +102,4 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </body>
     </html>
   );
-} 
+}  
