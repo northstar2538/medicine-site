@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     color: "#fff",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
   }}
->
+> <Link href="/" style={{ textDecoration: "none", color: "#fff" }}>
   <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
     <img
       src="/logo.png"
@@ -48,6 +48,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       MedDataTool
     </span>
   </div>
+</Link>
 
   <nav
     style={{
