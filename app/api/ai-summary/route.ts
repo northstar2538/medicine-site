@@ -30,11 +30,21 @@ Summarize in 1-2 concise, human-readable sentences.`;
     const prompt = promptParts.join("\n\n");
 
     // Single OpenAI API call
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.5,
-    });
+ const completion = await openai.chat.completions.create({
+  model: "gpt-4o-mini",
+  messages: [
+    {
+      role: "system",
+      content:
+        "You are a medical summarization assistant. Only summarize the FDA drug label text provided. Provide a simple explanation of the drug's main use, dosage guidance, and key warning in 2–3 sentences using plain language. Do not add information that is not present in the text."
+    },
+    {
+      role: "user",
+      content: prompt
+    }
+  ],
+  temperature: 0.3,
+});
 
     let text = completion.choices?.[0]?.message?.content?.trim() || "Summary unavailable.";
 
