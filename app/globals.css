@@ -27,3 +27,43 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin: 0;
 } 
+
+ /* FAQ section styling */
+
+.blog-content .faq-section {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Questions */
+.blog-content .faq-section ~ h3 {
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.blog-content .faq-section ~ h3::before {
+  content: "Q: ";
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* Answers */
+.blog-content .faq-section ~ h3 + p::before {
+  content: "A: ";
+  font-weight: 700;
+}
+
+/* Blog heading improvements */
+
+.blog-content h2 {
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.blog-content h3 {
+  font-weight: 600;
+  margin-top: 18px;
+}

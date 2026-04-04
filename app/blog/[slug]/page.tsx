@@ -3,6 +3,27 @@ import path from "path";
 import Image from "next/image";
 import { allDrugs } from "@/data/allDrugs";
 
+function extractFaq(content: string) {
+  const faqItems: any[] = [];
+
+  const regex = /<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/g;
+
+  let match;
+
+  while ((match = regex.exec(content)) !== null) {
+    faqItems.push({
+      "@type": "Question",
+      name: match[1],
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: match[2],
+      },
+    });
+  }
+
+  return faqItems;
+}
+
 interface Blog {
   slug: string;
   title: string;
@@ -18,12 +39,11 @@ function getBlogs(): Blog[] {
   const fileData = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(fileData);
 }
-
-function autoLinkDrugs(content: string) {
+ function autoLinkDrugs(content: string) {
   let processedContent = content;
 
   allDrugs.forEach((drug) => {
-    const regex = new RegExp(`\\b${drug}\\b`, "gi");
+    const regex = new RegExp(`\\b${drug}\\b`, "i");
 
     processedContent = processedContent.replace(
       regex,
@@ -33,6 +53,8 @@ function autoLinkDrugs(content: string) {
 
   return processedContent;
 }
+
+  
 
 export default async function BlogPost({
   params,
@@ -49,14 +71,38 @@ export default async function BlogPost({
     return <p style={{ padding: 20 }}>Blog not found</p>;
   }
 
+  /* ---------- FAQ SCHEMA ---------- */
+
+  const faqItems = extractFaq(blog.content);
+
+  const faqSchema =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems,
+        }
+      : null;
+
+  /* ---------- PAGE ---------- */
+
   return (
     <main style={{ padding: 40, maxWidth: 800, margin: "auto" }}>
+
+      {/* FAQ structured data */}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <h1 className="text-3xl font-bold">{blog.title}</h1>
 
       {blog.image && (
         <Image
           src={blog.image}
-          alt={blog.title}
+          alt={`${blog.title} infographic`}
           width={800}
           height={400}
           style={{ marginTop: 20, borderRadius: 6 }}
@@ -64,9 +110,14 @@ export default async function BlogPost({
       )}
 
       {/* Blog Content */}
-    <div
-  className="mt-6 leading-7 text-gray-800"
-  dangerouslySetInnerHTML={{ __html: autoLinkDrugs(blog.content) }}
+ <div
+  className="blog-content mt-6 leading-7 text-gray-800"
+  dangerouslySetInnerHTML={{
+    __html: autoLinkDrugs(blog.content).replace(
+      "<h2>Frequently Asked Questions</h2>",
+      '<h2 class="faq-section">Frequently Asked Questions</h2>'
+    ),
+  }}
 />
 
       {/* Medical Disclaimer */}
@@ -80,6 +131,7 @@ export default async function BlogPost({
           medical consultation.
         </p>
       </div>
+
     </main>
   );
 } 
