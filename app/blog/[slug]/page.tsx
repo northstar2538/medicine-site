@@ -189,15 +189,16 @@ export default async function BlogPost({
       image: blog.image
         ? `https://www.meddatatool.com${blog.image}`
         : "https://www.meddatatool.com/logo.png",
-      author: {
-        "@type": "Organization",
-        name: "MedDataTool",
-      },
+     author: {
+  "@type": "Organization",
+  name: "MedDataTool",
+  url: "https://www.meddatatool.com"
+},
       publisher: {
         "@type": "Organization",
         name: "MedDataTool",
       },
-      datePublished: blog.publishDate,
+      datePublished: `${blog.publishDate}T00:00:00+00:00`,
       mainEntityOfPage: `https://www.meddatatool.com/blog/${blog.slug}`,
     }),
   }}
