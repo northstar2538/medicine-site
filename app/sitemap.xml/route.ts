@@ -41,7 +41,12 @@ export async function GET() {
       return `${baseUrl}/drugs/${slug}`;
     });
 
-    const allUrls = [...staticUrls, ...drugUrls];
+    // Blog pages
+const blogUrls = [
+  `${baseUrl}/blog/metformin-side-effects-in-women`,
+];
+
+    const allUrls = [...staticUrls, ...drugUrls, ...blogUrls];
 
     const xml = generateSitemapXml(allUrls);
 
