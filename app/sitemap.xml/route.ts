@@ -17,7 +17,7 @@ ${urls
 
 export async function GET() {
   try {
-    const baseUrl = "https://meddatatool.com";
+    const baseUrl = "https://www.meddatatool.com";
 
     // Static pages
     const staticUrls = [
