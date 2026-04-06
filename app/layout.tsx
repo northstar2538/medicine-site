@@ -3,10 +3,13 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 
  export const metadata = {
+  metadataBase: new URL("https://www.meddatatool.com"),
   title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
   description:
-    "Search medications like   Metformin, Amoxicillin, Atorvastatin and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
-  metadataBase: new URL("https://meddatatool.com"),
+    "Search medications like Metformin, Amoxicillin, Atorvastatin and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
