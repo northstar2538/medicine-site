@@ -91,11 +91,25 @@ otherBrands = brandList
   }
 
   return (
+  <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Drug",
+          name: drug,
+          description: `Information about ${drug} including uses, dosage, side effects, and warnings.`,
+        }),
+      }}
+    />
+
     <DrugClient
       mainDrug={mainDrug}
       otherBrands={otherBrands}
       initialDrug={drug}
     />
-  );
+  </>
+);
 } 
  
