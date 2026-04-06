@@ -92,9 +92,12 @@ export async function generateMetadata({
   return {
     title: blog.title,
     description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
+    openGraph: {
+      title: blog.title,
+      description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
+    },
   };
 } 
-
 /* ---------- PAGE ---------- */
 
 export default async function BlogPost({
