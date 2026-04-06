@@ -31,6 +31,7 @@ function extractFaq(content: string) {
 interface Blog {
   slug: string;
   title: string;
+  description?: string;
   publishDate?: string;
   contentFile: string;
   image?: string;
@@ -89,15 +90,15 @@ export async function generateMetadata({
     };
   }
 
-  return {
-    title: blog.title,
-    description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
-    openGraph: {
-      title: blog.title,
-      description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
-    },
-  };
-} 
+ return {
+  title: {
+    absolute: blog.title,
+  },
+  description:
+    blog.description ||
+    `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
+};
+}
 /* ---------- PAGE ---------- */
 
 export default async function BlogPost({
