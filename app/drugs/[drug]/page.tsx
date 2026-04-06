@@ -15,16 +15,22 @@ interface FDAResult {
 }
 
 // ✅ METADATA (FIXED)
-export async function generateMetadata({
+ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ drug: string }>;
 }): Promise<Metadata> {
   const { drug } = await params;
 
+  const canonicalUrl = `https://www.meddatatool.com/drugs/${drug}`;
+
   return {
     title: `${drug} - MedDataTool | FDA Drug Info`,
     description: `Find detailed information about ${drug}, including uses, dosage, side effects, warnings, and FDA references.`,
+    
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 
