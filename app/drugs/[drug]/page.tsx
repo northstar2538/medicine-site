@@ -92,17 +92,20 @@ otherBrands = brandList
 
   return (
   <>
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Drug",
-          name: drug,
-          description: `Information about ${drug} including uses, dosage, side effects, and warnings.`,
-        }),
-      }}
-    />
+ <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Drug",
+      name: drug,
+      description: `Information about ${drug} including uses, dosage, side effects, and warnings.`,
+      url: `https://www.meddatatool.com/drugs/${drug}`,
+      drugClass: "Medication",
+      isAccessibleForFree: true
+    }),
+  }}
+/>
 
     <DrugClient
       mainDrug={mainDrug}
