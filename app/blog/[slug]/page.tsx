@@ -94,9 +94,7 @@ export async function generateMetadata({
   title: {
     absolute: blog.title,
   },
-  description:
-    blog.description ||
-    `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
+  description: blog.description,
 };
 }
 /* ---------- PAGE ---------- */
