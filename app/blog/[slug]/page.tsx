@@ -74,14 +74,15 @@ function autoLinkDrugs(content: string) {
 
 } 
 
+  // ✅ Fixed — await params first
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-
+  const { slug } = await params;
   const blogs = getBlogs();
-  const blog = blogs.find((b) => b.slug === params.slug);
+  const blog = blogs.find((b) => b.slug === slug);
 
   if (!blog) {
     return {
@@ -90,12 +91,38 @@ export async function generateMetadata({
     };
   }
 
- return {
-  title: {
-    absolute: blog.title,
-  },
-  description: blog.description,
-};
+  const canonicalUrl = `https://www.meddatatool.com/blog/${blog.slug}`;
+  const imageUrl = blog.image
+    ? `https://www.meddatatool.com${blog.image}`
+    : "https://www.meddatatool.com/logo.png";
+
+  return {
+    title: {
+      absolute: `${blog.title} | MedDataTool`,
+    },
+    description: blog.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      url: canonicalUrl,
+      type: "article",
+      publishedTime: blog.publishDate,
+      images: [{ url: imageUrl, width: 800, height: 420 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.description,
+      images: [imageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 /* ---------- PAGE ---------- */
 
