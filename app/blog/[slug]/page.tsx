@@ -73,6 +73,29 @@ function autoLinkDrugs(content: string) {
 
 } 
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const blogs = getBlogs();
+  const blog = blogs.find((b) => b.slug === slug);
+
+  if (!blog) {
+    return {
+      title: "MedDataTool Blog",
+      description: "Medical information and drug safety articles.",
+    };
+  }
+
+  return {
+    title: blog.title,
+    description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
+  };
+}
+
 /* ---------- PAGE ---------- */
 
 export default async function BlogPost({
