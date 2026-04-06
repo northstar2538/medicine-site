@@ -177,6 +177,32 @@ export default async function BlogPost({
   return (
     <main className="blog-wrapper">
 
+    {/* Article Structured Data */}
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: blog.title,
+      description: blog.description,
+      image: blog.image
+        ? `https://www.meddatatool.com${blog.image}`
+        : "https://www.meddatatool.com/logo.png",
+      author: {
+        "@type": "Organization",
+        name: "MedDataTool",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "MedDataTool",
+      },
+      datePublished: blog.publishDate,
+      mainEntityOfPage: `https://www.meddatatool.com/blog/${blog.slug}`,
+    }),
+  }}
+/>
+
       {/* FAQ Structured Data */}
       {faqSchema && (
         <script
