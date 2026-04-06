@@ -76,12 +76,11 @@ function autoLinkDrugs(content: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
 
   const blogs = getBlogs();
-  const blog = blogs.find((b) => b.slug === slug);
+  const blog = blogs.find((b) => b.slug === params.slug);
 
   if (!blog) {
     return {
@@ -94,7 +93,7 @@ export async function generateMetadata({
     title: blog.title,
     description: `Learn about ${blog.title.toLowerCase()} including symptoms, risks, and safety information.`,
   };
-}
+} 
 
 /* ---------- PAGE ---------- */
 
