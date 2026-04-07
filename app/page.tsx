@@ -15,10 +15,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center px-4 py-10">
+    <main className="flex flex-col items-center px-4 py-6">
 
       {/* === H1 for SEO === */}
-      <h1 className="text-4xl font-bold text-center text-blue-700 mb-8">
+      <h1 className="text-4xl font-bold text-center text-blue-700 mb-6">
         Search Drug Information
       </h1>
 
