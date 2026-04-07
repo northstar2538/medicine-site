@@ -11,6 +11,8 @@ export async function POST(request: Request) {
     if (!fdaData || !Array.isArray(fdaData) || fdaData.length === 0) {
       return NextResponse.json({ error: "Invalid or empty request body" }, { status: 400 });
     }
+    const cacheKey = `ai-summary:${JSON.stringify(fdaData)}`;
+  
 
     // Build a single prompt for all FDA records
     const promptParts = fdaData.map((item: any, index: number) => {

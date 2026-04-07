@@ -6,6 +6,8 @@ import Image from "next/image";
 interface Blog {
   slug: string;
   title: string;
+  description?: string;
+  publishDate?: string;
   content: string;
   image?: string;
 }
@@ -23,8 +25,17 @@ export default function BlogPage() {
   }
 
   return (
-    <main style={{ padding: "40px", maxWidth: "1000px", margin: "auto" }}>
-      <h1 style={{ marginBottom: "30px" }}>Medical Blog</h1>
+    <main style={{ padding: "20px 40px 40px", maxWidth: "1100px", margin: "auto" }}>
+      
+      {/* Page Heading */}
+      <h1 style={{ marginBottom: "5px", fontSize: "30px" }}>
+        MedDataTool Blog
+      </h1>
+
+      <p style={{ marginBottom: "15px", color: "#555" }}>
+        Latest articles about medications, side effects, dosage guidance,
+        and FDA drug safety.
+      </p>
 
       {blogs.length === 0 ? (
         <p>No blogs available</p>
@@ -33,7 +44,7 @@ export default function BlogPage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(300px,1fr))",
-            gap: "25px",
+            gap: "30px",
           }}
         >
           {blogs.map((blog) => (
@@ -42,27 +53,48 @@ export default function BlogPage() {
               href={`/blog/${blog.slug}`}
               style={{
                 border: "1px solid #eee",
-                borderRadius: "8px",
+                borderRadius: "10px",
                 overflow: "hidden",
                 textDecoration: "none",
                 color: "inherit",
                 background: "#fff",
+                transition: "0.2s",
               }}
             >
+              {/* Blog Image */}
               {blog.image && (
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  width={400}
-                  height={200}
-                  style={{ width: "100%", height: "auto" }}
-                />
+              <Image
+  src={blog.image}
+  alt={blog.title}
+  width={400}
+  height={250}
+  style={{
+    width: "100%",
+    height: "180px",
+    objectFit: "cover",
+  }}
+/>
               )}
 
-              <div style={{ padding: "15px" }}>
-                <h2 style={{ fontSize: "18px", lineHeight: "1.4" }}>
+              {/* Blog Content */}
+              <div style={{ padding: "18px" }}>
+                <h2
+                  style={{
+                    fontSize: "18px",
+                    lineHeight: "1.4",
+                    marginBottom: "10px",
+                  }}
+                >
                   {blog.title}
                 </h2>
+
+              
+
+                {blog.publishDate && (
+                  <span style={{ fontSize: "12px", color: "#888" }}>
+                    {blog.publishDate}
+                  </span>
+                )}
               </div>
             </Link>
           ))}
