@@ -19,7 +19,7 @@ interface FDAResult {
   params,
 }: {
   params: { drug: string };
-}): Promise<Metadata> {
+}) {
 
   const drug = params.drug;
 
@@ -40,7 +40,8 @@ interface FDAResult {
 }: {
   params: { drug: string };
 }) {
-  const { drug } = params;
+
+  const drug = params.drug.toLowerCase();
 
   let mainDrug: FDAResult | null = null;
   let otherBrands: string[] = [];
