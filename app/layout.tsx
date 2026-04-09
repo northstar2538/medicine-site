@@ -8,9 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
   title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
   description:
     "Search medications like Metformin, Amoxicillin, Atorvastatin and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
-  alternates: {
-    canonical: "/",
-  },
+  
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
