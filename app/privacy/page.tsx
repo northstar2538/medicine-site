@@ -1,3 +1,10 @@
+export const metadata = {
+  title: "Privacy Policy | MedDataTool",
+  description:
+    "Read the MedDataTool privacy policy to learn how we handle user information, cookies, and analytics on our drug information platform.",
+};
+
+
 "use client";
 
 export default function PrivacyPage() {
