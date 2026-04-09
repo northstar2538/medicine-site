@@ -1,6 +1,7 @@
 import './globals.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import { Analytics } from "@vercel/analytics/react";
 
  export const metadata = {
   metadataBase: new URL("https://www.meddatatool.com"),
@@ -102,6 +103,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <a href="/blog" style={{ margin: "0 10px", color: "#1a73e8" }}>Blog</a>
   </div>
 </footer>
+
+<Analytics />
 
       </body>
     </html>
