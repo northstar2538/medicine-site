@@ -41,7 +41,7 @@ interface FDAResult {
   params: { drug: string };
 }) {
 
-  const drug = params.drug.toLowerCase();
+  const drug = (params.drug || "").toLowerCase();
 
   let mainDrug: FDAResult | null = null;
   let otherBrands: string[] = [];
