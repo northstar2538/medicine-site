@@ -21,7 +21,7 @@ interface FDAResult {
   params: { drug: string };
 }): Promise<Metadata> {
 
-  const { drug } = params;
+  const drug = params.drug;
 
   const canonicalUrl = `https://www.meddatatool.com/drugs/${drug}`;
 
@@ -35,12 +35,12 @@ interface FDAResult {
 }
 
 // ✅ MAIN PAGE (FIXED)
-export default async function Page({
+ export default async function Page({
   params,
 }: {
-  params: Promise<{ drug: string }>;
+  params: { drug: string };
 }) {
-  const { drug } = await params;
+  const { drug } = params;
 
   let mainDrug: FDAResult | null = null;
   let otherBrands: string[] = [];
