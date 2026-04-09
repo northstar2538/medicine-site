@@ -18,16 +18,16 @@ interface FDAResult {
  export async function generateMetadata({
   params,
 }: {
-  params: { drug: string };
-}) {
-
-  const drug = params.drug;
+  params: Promise<{ drug: string }>;
+}): Promise<Metadata> {
+  const { drug } = await params;
 
   const canonicalUrl = `https://www.meddatatool.com/drugs/${drug}`;
 
   return {
     title: `${drug} - MedDataTool | FDA Drug Info`,
     description: `Find detailed information about ${drug}, including uses, dosage, side effects, warnings, and FDA references.`,
+    
     alternates: {
       canonical: canonicalUrl,
     },
@@ -35,13 +35,12 @@ interface FDAResult {
 }
 
 // ✅ MAIN PAGE (FIXED)
- export default async function Page({
+export default async function Page({
   params,
 }: {
-  params: { drug: string };
+  params: Promise<{ drug: string }>;
 }) {
-
-  const drug = (params.drug || "").toLowerCase();
+  const { drug } = await params;
 
   let mainDrug: FDAResult | null = null;
   let otherBrands: string[] = [];
@@ -116,4 +115,4 @@ otherBrands = brandList
   </>
 );
 } 
- 
+  
