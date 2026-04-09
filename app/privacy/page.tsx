@@ -1,9 +1,11 @@
-export const metadata = {
+ export const metadata = {
   title: "Privacy Policy | MedDataTool",
   description:
     "Read the MedDataTool privacy policy to learn how we handle user information, cookies, and analytics on our drug information platform.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
-
 export default function PrivacyPage() {
   return (
     <main style={{ padding: 20, fontFamily: "Arial, sans-serif", maxWidth: 800, margin: "0 auto" }}>

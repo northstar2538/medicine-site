@@ -2,13 +2,15 @@ import './globals.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { Analytics } from "@vercel/analytics/react";
-
- export const metadata = {
+ 
+export const metadata = {
   metadataBase: new URL("https://www.meddatatool.com"),
   title: "MedDataTool – Drug Information, Dosage, Side Effects & FDA Data",
   description:
     "Search medications like Metformin, Amoxicillin, Atorvastatin and thousands more. Get drug uses, dosage, side effects, warnings, and FDA label information.",
-  
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

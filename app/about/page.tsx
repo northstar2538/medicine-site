@@ -1,4 +1,11 @@
-"use client";
+export const metadata = {
+  title: "About MedDataTool",
+  description:
+    "Learn about MedDataTool and how we provide reliable drug information and FDA references.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 export default function AboutPage() {
   return (

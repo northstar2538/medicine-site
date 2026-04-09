@@ -3,6 +3,15 @@ import path from "path";
 import Link from "next/link";
 import Image from "next/image";
 
+export const metadata = {
+  title: "MedDataTool Blog – Drug Guides, Dosage & Side Effects",
+  description:
+    "Read medication guides, drug safety tips, dosage explanations, and side effect information for commonly prescribed medicines.",
+  alternates: {
+    canonical: "/blog",
+  },
+};
+
 interface Blog {
   slug: string;
   title: string;

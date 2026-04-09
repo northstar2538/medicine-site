@@ -1,3 +1,12 @@
+export const metadata = {
+  title: "Contact MedDataTool",
+  description:
+    "Contact MedDataTool for questions, feedback, or support regarding our drug information platform and medication data sources.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
 export default function ContactPage() {
   return (
     <main style={{ padding: 40 }}>
