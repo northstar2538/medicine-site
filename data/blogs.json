@@ -5,5 +5,28 @@
     "description": "Learn about metformin side effects in women including symptoms, risks, and safety tips.",
     "publishDate": "2026-04-04",
     "image": "/blog-images/metformin-side-effects-women-new.png",
-    "contentFile": "metformin-side-effects-in-women.html"  }
+    "contentFile": "metformin-side-effects-in-women.html" ,
+    "relatedDrugs": [
+    "glipizide",
+    "insulin",
+    "januvia",
+    "glyxambi"
+  ] },
+
+    {
+  "slug": "amoxicillin-dosage-bladder-infection",
+  "title": "Amoxicillin Dosage for Bladder Infection: What Adults Need to Know",
+  "description": "Learn the recommended amoxicillin dosage for bladder infections in adults, how long treatment lasts, and safety information.",
+  "publishDate": "2026-04-09",
+  "image": "/blog-images/amoxicillin-dosage-bladder-infection.png",
+  "contentFile": "amoxicillin-dosage-bladder-infection.html",
+   "relatedDrugs": [
+    "nitrofurantoin",
+    "trimethoprim-sulfamethoxazole",
+    "levofloxacin",
+    "fosfomycin"
+  ]
+}
+
+
 ] 

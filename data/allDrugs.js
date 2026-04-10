@@ -206,5 +206,14 @@ export const allDrugs = [
   "imipramine",
   "clomipramine",
   "doxepin",
-  "lipitor"
+  "lipitor",
+  "nitrofurantoin",
+"trimethoprim sulfamethoxazole",
+"levofloxacin",
+"glyxambi",
+"januvia",
+"fosfomycin"
+
+
+
 ]; 

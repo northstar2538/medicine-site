@@ -35,6 +35,7 @@ interface Blog {
   publishDate?: string;
   contentFile: string;
   image?: string;
+  relatedDrugs?: string[];
 }
 
 /* ---------- LOAD BLOGS ---------- */
@@ -256,58 +257,23 @@ export default async function BlogPost({
   </h2>
 
   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-
-    <a href="/drugs/glipizide"
-      style={{
-        border: "1px solid #d1d5db",
-        padding: "6px 12px",
-        borderRadius: "20px",
-        color: "#2563eb",
-        fontWeight: 500,
-        fontSize: "14px",
-        textDecoration: "none"
-      }}>
-      Glipizide
-    </a>
-
-    <a href="/drugs/insulin"
-      style={{
-        border: "1px solid #d1d5db",
-        padding: "6px 12px",
-        borderRadius: "20px",
-        color: "#2563eb",
-        fontWeight: 500,
-        fontSize: "14px",
-        textDecoration: "none"
-      }}>
-      Insulin
-    </a>
-
-    <a href="/drugs/januvia"
-      style={{
-        border: "1px solid #d1d5db",
-        padding: "6px 12px",
-        borderRadius: "20px",
-        color: "#2563eb",
-        fontWeight: 500,
-        fontSize: "14px",
-        textDecoration: "none"
-      }}>
-      Januvia
-    </a>
-
-    <a href="/drugs/glyxambi"
-      style={{
-        border: "1px solid #d1d5db",
-        padding: "6px 12px",
-        borderRadius: "20px",
-        color: "#2563eb",
-        fontWeight: 500,
-        fontSize: "14px",
-        textDecoration: "none"
-      }}>
-      Glyxambi
-    </a>
+ {blog.relatedDrugs && blog.relatedDrugs.map((drug) => (
+  <a
+    key={drug}
+    href={`/drugs/${drug}`}
+    style={{
+      border: "1px solid #d1d5db",
+      padding: "6px 12px",
+      borderRadius: "20px",
+      color: "#2563eb",
+      fontWeight: 500,
+      fontSize: "14px",
+      textDecoration: "none"
+    }}
+  >
+    {drug.replace(/-/g, " ")}
+  </a>
+))}
 
   </div>
 </div>
